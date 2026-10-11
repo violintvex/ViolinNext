@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="frontend-dashboard/public/violinnext-vn.svg" width="72" height="72" alt="ViolinNext" />
+<img src="assets/screenshots/violinnext-vn.svg" width="72" height="72" alt="ViolinNext" />
 
 # ViolinNext
 
