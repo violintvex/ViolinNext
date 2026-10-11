@@ -253,6 +253,18 @@ npm ci --prefix frontend-dashboard
 node scripts/verify-production.mjs
 ```
 
+## License
+
+Copyright © 2026 violintvex.
+
+This project is free software licensed under the **GNU General Public License v3.0 (GPL-3.0-only)**.
+
+You may use, modify, and redistribute this software under the terms of the GNU GPL v3.
+
+See the [LICENSE](LICENSE) file for the complete license terms.
+
+Developed and maintained by **violintvex**.
+
 ## Support
 
 For questions, suggestions, and feedback, contact [violintvex@gmail.com](mailto:violintvex@gmail.com).
