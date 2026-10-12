@@ -1,20 +1,57 @@
 <div align="center">
 
-<img src="assets/screenshots/violinnext-vn.svg" width="72" height="72" alt="ViolinNext" />
-
 # ViolinNext
 
-**Network monitoring and infrastructure management**
+**Self-hosted network monitoring and infrastructure management**
 
-Monitor network health, investigate connectivity, and report on infrastructure from one self-hosted platform.
+Monitor network health, investigate port issues, and turn device measurements into management reports.
+
+[**Download Beta**](https://github.com/violintvex/ViolinNext/releases) · [Installation](#installation) · [Features](#features) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
 
 ![Release](https://img.shields.io/badge/release-v0.1%20beta%20%C2%B7%20Build%202-217c76?style=flat-square)
-![Platform](https://img.shields.io/badge/packages-DEB%20%7C%20RPM-52647e?style=flat-square)
-![SNMP](https://img.shields.io/badge/SNMP-v1%20%7C%20v2c%20%7C%20v3-52647e?style=flat-square)
-
-[Features](#features) · [Screenshots](#screenshots) · [Installation](#installation) · [Configuration](#initial-configuration) · [Operations](#operations) · [Support](#support)
+![Platform](https://img.shields.io/badge/Linux-amd64%20%7C%20x86__64-52647e?style=flat-square)
+![Packages](https://img.shields.io/badge/packages-DEB%20%7C%20RPM-52647e?style=flat-square)
 
 </div>
+
+![ViolinNext operations dashboard — synthetic demonstration data](assets/screenshots/overview.png)
+
+*Actual application UI with fictional demonstration data; not a live deployment or a performance benchmark.*
+
+**System requirements:** Linux x86_64/amd64, Node.js 22+, systemd, and glibc 2.36+. Node.js is not bundled. ARM and Alpine are not supported by these packages. ICMP sensors also require the system `ping` utility and appropriate permissions.
+
+| Get started | Download |
+| --- | --- |
+| Debian / Ubuntu | [Download DEB](https://github.com/violintvex/ViolinNext/releases/download/beta-v0.1-build2/violinnext_0.1.0.beta.1-2_amd64.deb) |
+| Fedora | [Download RPM](https://github.com/violintvex/ViolinNext/releases/download/beta-v0.1-build2/violinnext-0.1.0-0.beta.1.2.x86_64.rpm) |
+| Signature verification | [Download key and signatures](https://github.com/violintvex/ViolinNext/releases/download/beta-v0.1-build2/KEY.zip) · [Verification instructions](#verify-the-download) |
+
+[Verify your download](#verify-the-download), [install the package](#install-the-package), then create your administrator account. See [release status](#release-status) for the beta's tested scope and remaining validation.
+
+## Screenshots
+
+### Port diagnostics
+
+Inspect interface states, measured counters, and per-port warnings.
+
+![ViolinNext port diagnostics — synthetic demonstration data](assets/screenshots/ports.png)
+
+### Topology view
+
+Organize devices and document connections in an operator-defined topology. Links are maintained by operators; this view does not prove physical connectivity.
+
+![ViolinNext network topology — synthetic demonstration data](assets/screenshots/topology.png)
+
+<details>
+<summary>Management reporting</summary>
+
+Prepare PDF reports with an organization, recipient, reporting period, and management notes.
+
+![ViolinNext management reporting — synthetic demonstration data](assets/screenshots/reports.png)
+
+</details>
+
+All screenshots show the actual interface with synthetic data. Device identities, addresses, measurements, and events are fictional. Screenshot fixtures are isolated from operational data and are not included in installation packages.
 
 ## Overview
 
@@ -40,28 +77,6 @@ Monitoring uses actual device responses and stored measurements. SNMP collection
 
 Device measurements depend on firmware, MIB support, and configured access. Unsupported readings remain unavailable. IP/MAC observations can identify an uplink or virtual interface and do not always establish an endpoint's physical port.
 
-## Screenshots
-
-These captures show the actual application interface with **synthetic demonstration data**. Device identities, addresses, measurements, and events are fictional. They illustrate the interface, not a live deployment or a performance benchmark. Demo data is isolated from the production application and is not included in the installation packages.
-
-### Operations overview
-
-Device health, collection timestamps, and historical trends in a single view.
-
-![ViolinNext Overview with synthetic demonstration data](assets/screenshots/overview.png)
-
-### Port detection and diagnostics
-
-Interface states and details, including an example of a high inbound broadcast rate and increasing inbound errors on a selected port.
-
-![ViolinNext Port detection with simulated port states and broadcast warnings](assets/screenshots/ports.png)
-
-### Management reporting
-
-Prepare a PDF report with the organization, recipient, reporting period, and management notes.
-
-![ViolinNext Reports form populated with fictional company information](assets/screenshots/reports.png)
-
 ## Port fault detection
 
 **Available in Beta v0.1 Build 2:** automatic fault classification and evidence-based loop investigation.
@@ -82,30 +97,17 @@ Counter-based warnings need comparable samples and supported counters. Short bur
 
 ## Installation
 
-### Requirements
+### Download
 
-The Linux packages target **x86_64 / amd64** and require:
+Get the packages from [GitHub Releases](https://github.com/violintvex/ViolinNext/releases/tag/beta-v0.1-build2). The download links and system requirements are listed at the top of this page. Application dependencies are included; Node.js must already be installed from a trusted distribution or vendor repository.
 
-- **Node.js 22 or newer**, installed from a trusted distribution or vendor repository.
-- **systemd** and **glibc 2.36 or newer**.
-- Network access to the devices and services being monitored.
-
-Application dependencies are included; Node.js is not bundled. ARM and Alpine Linux are not supported by these packages. ICMP monitoring requires the system `ping` utility and appropriate permissions.
-
-### Download Beta v0.1 Build 2
-
-| Platform | Package |
-| --- | --- |
-| Debian / Ubuntu | `violinnext_0.1.0~beta.1-2_amd64.deb` |
-| Fedora / RPM | `violinnext-0.1.0-0.beta.1.2.x86_64.rpm` |
-
-Download **ViolinNext Beta v0.1 Build 2** from this repository's **Releases** section. Select the package for your distribution and download `SHA256SUMS`, `SHA256SUMS.asc`, `VIOLINTVEX-PUBLIC-KEY.asc`, `RELEASE-NOTES.txt`, and `BUILD-VERIFICATION.json`. Debian users also need the matching `.deb.asc` file.
+Download `KEY.zip` alongside your package and extract its contents. The bundle contains the public key, the Debian detached signature, and the signed checksum manifest. It does not contain a private signing key.
 
 ### Verify the download
 
 **Build 2 signing status: verified.** The RPM contains an OpenPGP signature, and the Debian package has a detached `.deb.asc` signature. Both package signatures and the detached `SHA256SUMS.asc` manifest signature were verified locally on 11 October 2026. All files listed in the manifest matched their checksums.
 
-Download `VIOLINTVEX-PUBLIC-KEY.asc` and the matching package signature files from the release assets. Build 1 signatures cannot verify Build 2 packages.
+Extract `KEY.zip` and copy its files from the `KEY/` directory into the same directory as the downloaded package. Build 1 signatures cannot verify Build 2 packages.
 
 **Build 2 release key fingerprint:**
 
@@ -117,6 +119,12 @@ Before importing `VIOLINTVEX-PUBLIC-KEY.asc`, compare its full fingerprint with 
 
 ```sh
 gpg --show-keys --with-fingerprint VIOLINTVEX-PUBLIC-KEY.asc
+```
+
+The public DEB asset uses a dot in its filename, while the signed manifest and signature filename use a tilde. Rename the download to match the signed manifest; renaming does not change its contents:
+
+```sh
+mv violinnext_0.1.0.beta.1-2_amd64.deb 'violinnext_0.1.0~beta.1-2_amd64.deb'
 ```
 
 For the Debian package:
@@ -135,15 +143,26 @@ rpmkeys --checksig --verbose violinnext-0.1.0-0.beta.1.2.x86_64.rpm
 
 Require a valid signature from the expected key before installation. A digest-only result or missing key is not successful signature verification. Local APT installation does not automatically check the detached `.deb` signature.
 
-To verify the release manifest and all listed assets, download them into the same directory and run:
+Verify the signed checksum manifest before checking your selected package:
 
 ```sh
 gpg --import VIOLINTVEX-PUBLIC-KEY.asc
 gpg --verify SHA256SUMS.asc SHA256SUMS
-sha256sum -c SHA256SUMS
 ```
 
-Verify the signed manifest before trusting its checksums. The checksums cover both packages, the Debian signature, public key, release notes, and verification record. The included release notes and verification record were finalized before manifest signing and still describe that earlier signing stage; the successfully verified `SHA256SUMS.asc` establishes the current manifest signature.
+For the renamed DEB:
+
+```sh
+grep -F '  violinnext_0.1.0~beta.1-2_amd64.deb' SHA256SUMS | sha256sum -c -
+```
+
+For the RPM:
+
+```sh
+grep -F '  violinnext-0.1.0-0.beta.1.2.x86_64.rpm' SHA256SUMS | sha256sum -c -
+```
+
+Require both successful signature verification and a matching package checksum. The manifest also lists build records that are not currently separate assets in the public release, so a full `sha256sum -c SHA256SUMS` may report missing files. That does not replace verification of the package you install.
 
 ### Install the package
 
@@ -233,7 +252,7 @@ Uninstalling the package, including Debian purge, deliberately preserves persist
 
 Build 1 installation, reinstallation, and data preservation were tested in isolated Ubuntu 24.04 and Fedora 44 environments. Those distribution-level install/upgrade checks have not been repeated for Build 2.
 
-Systemd unit syntax was checked during package preparation. Full hardened service startup still requires a VM or server test because rootless-container namespace restrictions prevented that check. These results do not establish compatibility with every device or capacity for enterprise workloads. See `BUILD-VERIFICATION.json` and `RELEASE-NOTES.txt` in the release assets for details.
+Systemd unit syntax was checked during package preparation. Full hardened service startup still requires a VM or server test because rootless-container namespace restrictions prevented that check. These results do not establish compatibility with every device or capacity for enterprise workloads. The local build records are `BUILD-VERIFICATION.json` and `RELEASE-NOTES.txt`; they are not currently separate assets in the public GitHub release. The summary above reflects those records, not a new test run.
 
 ## Security
 
@@ -241,29 +260,37 @@ Use least-privilege monitoring credentials, restrict authorized networks, enable
 
 Report suspected vulnerabilities privately to [violintvex@gmail.com](mailto:violintvex@gmail.com). Do not include credentials or customer network information in public issues.
 
-## Contributing
+## Source and development
 
-Include the application version, operating system, reproduction steps, and expected versus actual behavior in bug reports. For device issues, include the model, firmware, SNMP version, and sanitized diagnostic evidence.
+The GitHub repository currently serves as a release and documentation entry point. GitHub's automatically generated **Source code (zip)** contains the repository contents; it must not be confused with the separately uploaded application source.
 
-Run the verification suite before submitting code changes:
+The release currently includes a legacy `SourceCode.zip` asset. It is pending replacement with a sanitized source distribution and is **not recommended for deployment or redistribution**. Use the signed DEB/RPM packages for installation. A replacement source archive must exclude databases, runtime configuration, encryption keys, setup tokens, dependencies, and generated builds before publication.
+
+When a clean source archive is available, extract it and run the following from the directory containing `backend/`, `frontend-dashboard/`, and `scripts/`. Do not assume that cloning the documentation repository provides these files.
 
 ```sh
 npm ci --prefix backend
 npm ci --prefix frontend-dashboard
+API_INTERNAL_URL=http://127.0.0.1:3001 npm run build --prefix frontend-dashboard
 node scripts/verify-production.mjs
 ```
 
-## License
+The verification command runs source checks, automated tests, lint, a production build, HTTP smoke checks, and dependency audits. It requires network access for dependency installation and audits. Native module installation may require Python, make, and a C/C++ compiler.
 
-Copyright © 2026 violintvex.
+For Linux x86_64 package builds, use a clean source checkout, install `rpmbuild`, GNU tar, binutils (`ar`), and the required Node.js toolchain, then run:
 
-This project is free software licensed under the **GNU General Public License v3.0 (GPL-3.0-only)**.
+```sh
+node scripts/prepare-native.mjs ViolinNext-beta-v0_1-build2-x64
+node scripts/build-packages.mjs release/ViolinNext-beta-v0_1-build2-x64
+```
 
-You may use, modify, and redistribute this software under the terms of the GNU GPL v3.
+Build output goes under `release/`. These scripts expect fresh output directories; keep signed releases outside the build workspace. Locally built packages are unsigned and are not automatically identical to published packages. Package installation, upgrades, hardened systemd startup, and device interoperability require separate acceptance testing.
 
-See the [LICENSE](LICENSE) file for the complete license terms.
+## Contributing
 
-Developed and maintained by **violintvex**.
+Bug reports, device compatibility findings, documentation improvements, and feature proposals are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md), then [report a bug](https://github.com/violintvex/ViolinNext/issues/new?template=bug_report.yml) or [request a feature](https://github.com/violintvex/ViolinNext/issues/new?template=feature_request.yml).
+
+For suspected vulnerabilities, follow [SECURITY.md](SECURITY.md) and contact the maintainer privately. Never attach credentials or customer network data to a public issue.
 
 ## Support
 
